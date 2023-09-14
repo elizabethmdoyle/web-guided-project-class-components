@@ -16,9 +16,10 @@ class ListForm extends React.Component {
   };
 
   // class property to submit form
-  submitForm = () => {
+  submitForm = e => {
     e.preventDefault();
-    this.props.addItem(e, this.state.item)
+    this.props.addItem(e, this.state.item);
+    this.setState({...this.state, item: ''})
   }
 
 

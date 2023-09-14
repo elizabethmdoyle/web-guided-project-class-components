@@ -55,11 +55,26 @@ class App extends React.Component {
       id: Date.now(),
       purchased: false 
     }
-    this.setState({...this.state, groceries: {...this.state.groceries, newItem} })
+    this.setState({...this.state, groceries: [...this.state.groceries, newItem] })
+  }
+
+  toggleItem = itemId => {
+    console.log(itemId)
+    this.setState({...this.state, groceries: this.state.groceries.map(item => { 
+      if (item.id === itemId) {
+        return {...item, purchased: !item.purchased}
+      }
+      
+      return item;
+    })})
   }
 
   clearPurchased = () => {
-    
+    this.setState({...this.state, groceries: this.state.groceries.filter(item => {
+      if(!item.purchased) {
+        return item
+      }
+    })})
   }
 
   render() {
@@ -69,9 +84,9 @@ class App extends React.Component {
            <h1>Shopping List</h1>
            <ListForm addItem={this.addItem} />
          </div>
-        <GroceryList groceries={groceries} />
+        <GroceryList groceries={this.state.groceries} toggleItem={this.toggleItem}/>
         <button className="clear-btn" clearPurchased={this.clearPurchased}>Clear Purchased</button>
-        <button onClick={(e) => this.addItem(e, 'orange')}>Add Orange</button>
+        {/* <button onClick={(e) => this.addItem(e, 'orange')}>Add Orange</button> */}
        </div>
     );
   }

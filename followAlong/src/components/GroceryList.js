@@ -8,7 +8,7 @@ const GroceryList = props => {
   return (
     <div className="shopping-list">
       {props.groceries.map(item => (
-        <Item togglePurchased={props.togglePurchased} key={item.id} item={item} />
+        <Item toggleItem={props.toggleItem} togglePurchased={props.togglePurchased} key={item.id} item={item} />
       ))}
     </div>
   );
